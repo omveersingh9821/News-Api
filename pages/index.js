@@ -21,35 +21,34 @@ export default function Home({ articles,API_KEYS }) {
   const offset = currentPage * articlesPerPage;
   const currentArticles = articles.slice(offset, offset + articlesPerPage);
 
-  const getData = (search) => {
-    
-    if (search) {
-      axios
-        .get(
-          `https://newsapi.org/v2/everything?q=${search}&pageSize=10`,{
-            headers: {
-              Authorization: `Bearer ${API_KEYS}`,
-            }
-          }
-        )
-        .then((response) => {
-          return response.data;
-        })
-        .then((data) => {
-          const { articles } = data;
-          setResult(articles);
-        })
-        .catch((error) => console.log(error));
+  const getData = async(value) => {
+    if (value) {
+      console.log(value);
+     
+      const url = '/api/handleRequest';
+      const response = await axios.post(url, {
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        value: JSON.stringify({value})
+      });
+      
+      const data = await response.data;
+      const { articles } = data;
+      setResult(articles);
+      console.log(articles);
       
     }
   };
   const deb = useCallback(
-    debounce((search) => {
-      getData(search);
+    debounce((value) => {
+      getData(value);
     }, 700),
     []
   );
+
   const handleValue = (value) => {
+    
     setSearch(value);
     deb(value);
   };
@@ -62,17 +61,19 @@ export default function Home({ articles,API_KEYS }) {
       return;
     }
     if (search != "") {
-      const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${search}&pageSize=10`,{
-          headers: {
-            Authorization: `Bearer ${API_KEYS}`,
-          }
-        }
-      );
+      const option = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        value: JSON.stringify({value:search})
+      }
+      const url = '/api/handleRequest';
+      const response = await axios.post(url, option);
       const data = await response.data;
       const { articles } = data;
-      // console.log(articles[0].title);
       setResult(articles);
+      console.log(articles);
+      
     }
   };
 
