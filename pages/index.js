@@ -11,6 +11,7 @@ export default function Home({ articles,API_KEYS }) {
   const [currentPage, setCurrentPage] = useState(0);
   const articlesPerPage = 4;
   
+  
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -25,7 +26,11 @@ export default function Home({ articles,API_KEYS }) {
     if (search) {
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=${search}&pageSize=10&apiKey=${API_KEYS}`
+          `https://newsapi.org/v2/everything?q=${search}&pageSize=10`,{
+            headers: {
+              Authorization: `Bearer ${API_KEYS}`,
+            }
+          }
         )
         .then((response) => {
           return response.data;
@@ -35,6 +40,7 @@ export default function Home({ articles,API_KEYS }) {
           setResult(articles);
         })
         .catch((error) => console.log(error));
+      
     }
   };
   const deb = useCallback(
@@ -57,7 +63,11 @@ export default function Home({ articles,API_KEYS }) {
     }
     if (search != "") {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${search}&pageSize=10&apiKey=${API_KEYS}`
+        `https://newsapi.org/v2/everything?q=${search}&pageSize=10`,{
+          headers: {
+            Authorization: `Bearer ${API_KEYS}`,
+          }
+        }
       );
       const data = await response.data;
       const { articles } = data;
@@ -225,7 +235,11 @@ export const getServerSideProps = async (pageContext) => {
   const API_KEYS = process.env.API_KEYS;
     console.log(API_KEYS);
   const response = await axios.get(
-    `https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.API_KEYS}`
+    `https://newsapi.org/v2/top-headlines?country=in`, {
+      headers: {
+        Authorization: `Bearer ${API_KEYS}`,
+      }
+    }
   );
   const data = await response.data;
   const { articles } = data;
