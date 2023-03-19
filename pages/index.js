@@ -5,11 +5,12 @@ import { debounce } from "lodash";
 import ReactPaginate from "react-paginate";
 
 
-export default function Home({ articles }) {
+export default function Home({ articles,API_KEYS }) {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const articlesPerPage = 4;
+  
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -20,10 +21,11 @@ export default function Home({ articles }) {
   const currentArticles = articles.slice(offset, offset + articlesPerPage);
 
   const getData = (search) => {
+    
     if (search) {
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=${search}&pageSize=10&apiKey=d552d7bfdae7414aad21980a9838ca49`
+          `https://newsapi.org/v2/everything?q=${search}&pageSize=10&apiKey=${API_KEYS}`
         )
         .then((response) => {
           return response.data;
@@ -55,7 +57,7 @@ export default function Home({ articles }) {
     }
     if (search != "") {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=d552d7bfdae7414aad21980a9838ca49`
+        `https://newsapi.org/v2/everything?q=${search}&pageSize=10&apiKey=${API_KEYS}`
       );
       const data = await response.data;
       const { articles } = data;
@@ -220,6 +222,8 @@ export default function Home({ articles }) {
 }
 
 export const getServerSideProps = async (pageContext) => {
+  const API_KEYS = process.env.API_KEYS;
+    console.log(API_KEYS);
   const response = await axios.get(
     `https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.API_KEYS}`
   );
@@ -229,6 +233,7 @@ export const getServerSideProps = async (pageContext) => {
   return {
     props: {
       articles,
+      API_KEYS
     },
   };
 };
