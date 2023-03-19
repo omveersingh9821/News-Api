@@ -1,0 +1,13 @@
+.main{
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.main1{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+

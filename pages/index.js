@@ -2,42 +2,39 @@ import styles from "@/styles/Home.module.css";
 import { useState, useCallback } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
-import ReactPaginate from "react-paginate";
+import Content from "@/components/Content";
+import Spinner from "@/components/Spinner";
+import ReactPagination from "@/components/ReactPagination";
+import SearchBar from "@/components/SearchBar";
 
-
-export default function Home({ articles,API_KEYS }) {
+export default function Home({ articles, API_KEYS }) {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const articlesPerPage = 4;
-  
-  
+  const articlesPerPage = 3;
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
     window.scroll(0, 0);
   };
-
   const offset = currentPage * articlesPerPage;
   const currentArticles = articles.slice(offset, offset + articlesPerPage);
 
-  const getData = async(value) => {
+  //debounce 
+  const getData = async (value) => {
     if (value) {
-      console.log(value);
-     
-      const url = '/api/handleRequest';
+      const url = "/api/handleRequest";
       const response = await axios.post(url, {
         headers: {
-          'Content-Type': 'application/json', 
+          "Content-Type": "application/json",
         },
-        value: JSON.stringify({value})
+        value: JSON.stringify({ value }),
       });
-      
+
       const data = await response.data;
       const { articles } = data;
       setResult(articles);
-      console.log(articles);
-      
+      // console.log(articles);
     }
   };
   const deb = useCallback(
@@ -46,185 +43,64 @@ export default function Home({ articles,API_KEYS }) {
     }, 700),
     []
   );
-
+   
   const handleValue = (value) => {
-    
     setSearch(value);
     deb(value);
   };
 
+  //handle search
   const handleSearch = async (e) => {
     e.preventDefault();
-    const MAX_SEARCH_TERM_LENGTH = 50;
-    if (search.length > MAX_SEARCH_TERM_LENGTH) {
+    const maxLen = 50;
+    if (search.length > maxLen) {
       alert("Search term is too long");
       return;
     }
     if (search != "") {
       const option = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        value: JSON.stringify({value:search})
-      }
-      const url = '/api/handleRequest';
+        value: JSON.stringify({ value: search }),
+      };
+      const url = "/api/handleRequest";
       const response = await axios.post(url, option);
       const data = await response.data;
       const { articles } = data;
       setResult(articles);
       console.log(articles);
-      
     }
   };
 
   return (
     <>
-      <div className="page-container">
-        <div className={styles.main}>
+      <div className="page-container mb-5" >
+        {/* <div className={styles.main}>
           <h1 className={styles.title}>
             Welcome to <span>News</span> API
           </h1>
-        </div>
+        </div> */}
 
-        <div className={styles.search}>
-          <form onSubmit={handleSearch}>
-            <div className="d-flex justify-content-center mx-5">
-              <input
-                type="text"
-                placeholder="Search"
-                className="form-control"
-                onChange={(e) => handleValue(e.target.value)}
-              />
-              <button type="submit" className="btn btn-success mx-2">
-                Search
-              </button>
-            </div>
-          </form>
-        </div>
+        
+        <SearchBar styles={styles} handleSearch={handleSearch} handleValue={handleValue}/>
 
         {search.length !== 0 ? (
           <div className="d-flex flex-column">
             {result.length === 0 ? (
-              <div className={styles.spinner}>
-                <div className="spinner-border m-5" role="status">
-                  <span className="sr-only"></span>
-                </div>
-              </div>
+              <Spinner styles={styles} />
             ) : (
-              <div
-                className="d-flex flex-column justify-content-center align-items-sm-center"
-                style={{ marginTop: "1rem" }}
-              >
-                {result.map((article, index) => (
-                  <div
-                    className="card mb-3"
-                    style={{
-                      maxWidth: "440px",
-                      margin: "0rem 1rem 0 1rem",
-                      padding: "6px",
-                    }}
-                    key={index}
-                  >
-                    <div className="row no-gutters">
-                      {article.urlToImage && (
-                        <div className="col-md-4" style={{ width: "540px" }}>
-                          <img
-                            src={article.urlToImage}
-                            className="card-img"
-                            alt=""
-                          />
-                        </div>
-                      )}
-
-                      <div className="col-md-12">
-                        <div className="card-body">
-                          <h1
-                            className="card-title"
-                            onClick={() => (window.location.href = article.url)}
-                            style={{ cursor: "pointer",fontSize:"20px"}}
-                          >
-                            {article.title}
-                          </h1>
-                          <p className="card-text text-secondary">
-                            {article.description}
-                          </p>
-                          <p className="card-text">
-                            <small className="text-muted">
-                              Published At : {article.publishedAt.slice(0, 10)}
-                            </small>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <Content currentArticles={result} />
             )}
           </div>
         ) : (
           <>
-            <div
-              className="d-flex flex-column justify-content-center align-items-sm-center"
-              style={{ marginTop: "1rem" }}
-            >
-              {currentArticles.map((article, index) => (
-                <div
-                  className="card mb-3"
-                  style={{
-                    maxWidth: "440px",
-                    margin: "0rem 1rem 0 1rem",
-                    padding: "6px",
-                  }}
-                  key={index}
-                >
-                  <div className="row no-gutters">
-                    {article.urlToImage && (
-                      <div className="col-md-4" style={{ width: "540px" }}>
-                  
-                        <img
-                          src={article.urlToImage}
-                          className="card-img"
-                          alt={article.title}
-                        />
-                      </div>
-                    )}
-
-                    <div className="col-md-12">
-                      <div className="card-body">
-                        <h1
-                          className="card-title"
-                          onClick={() => (window.location.href = article.url)}
-                          style={{ cursor: "pointer",fontSize:"20px"}}
-                        >
-                          {article.title}
-                        </h1>
-                        <p className="card-text text-secondary">
-                          {article.description}
-                        </p>
-                        <p className="card-text">
-                          <small className="text-muted">
-                            Published At : {article.publishedAt.slice(0, 10)}
-                          </small>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="pagination">
-              <ReactPaginate
-                previousLabel={"←"}
-                nextLabel={"→"}
-                pageCount={Math.ceil(articles.length / articlesPerPage)}
-                onPageChange={handlePageClick}
-                containerClassName={"pagination-list"}
-                pageClassName={"pagination-item"}
-                previousClassName={"pagination-item"}
-                nextClassName={"pagination-item"}
-                activeClassName={"active"}
-              />
-            </div>
+            <Content currentArticles={currentArticles} />
+            <ReactPagination
+              articles={articles}
+              articlesPerPage={articlesPerPage}
+              handlePageClick={handlePageClick}
+            />
           </>
         )}
       </div>
@@ -234,12 +110,13 @@ export default function Home({ articles,API_KEYS }) {
 
 export const getServerSideProps = async (pageContext) => {
   const API_KEYS = process.env.API_KEYS;
-    console.log(API_KEYS);
+  // console.log(API_KEYS);
   const response = await axios.get(
-    `https://newsapi.org/v2/top-headlines?country=in`, {
+    `https://newsapi.org/v2/top-headlines?country=in`,
+    {
       headers: {
         Authorization: `Bearer ${API_KEYS}`,
-      }
+      },
     }
   );
   const data = await response.data;
@@ -248,7 +125,7 @@ export const getServerSideProps = async (pageContext) => {
   return {
     props: {
       articles,
-      API_KEYS
+      API_KEYS,
     },
   };
 };

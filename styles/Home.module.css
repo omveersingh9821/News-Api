@@ -4,29 +4,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 7rem;
+}
+.title{
+  font-size: 2rem;
+  color: #f6f4f4;
+  margin-bottom: 0.5rem;
 }
 
-.post{
-  width: 500px;
-  margin-bottom: 25px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 12px;
-}
-.post img{
-  width: 100%;
-
-}
-.post h1{
-  font-size: 1.2rem;
-  cursor:pointer;
-  text-align: center;
-
-}
-.post p{
- 
-  color:rgb(79, 79, 79)
-}
 .pagination{
   width: 100%;
   display: flex;
@@ -34,27 +19,26 @@
 }
 .pagination div{
   margin: 25px;
+  border: 1px solid #ccc;
 }
 
-.pagination .active{
+.pagination .active{ 
   cursor: pointer;
-}
-.pagination .disabled{
-  cursor: not-allowed;
-  color: rgb(179,179,179);
 }
 
 .search{
-  margin-top: 1rem;
+  margin-top: 5rem;
 }
 .search input{
   width: 25%;
+  color: #aeaeae;
 }
 
 .spinner{
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #aeaeae;
 }
 
 @media screen and (max-width: 1068px){
