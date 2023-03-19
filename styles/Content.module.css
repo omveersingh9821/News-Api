@@ -1,13 +1,40 @@
 .main{
     display: flex;
-    margin-top: 1rem;
+    margin-top: 2rem;
     flex-wrap: wrap;
     justify-content: center;
+    color: rgb(49, 49, 49);
+    
 }
-.main1{
-    margin-top: 4rem;
+
+.subCategory{
+    margin-top: 4.5rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+.subInner{
+    transition: all 0.1s ease-in-out;
 
+}
+.subInner:hover{
+    transform: scale(1.007);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+.scale div{
+    transition: all 0.1s ease-in-out;
+}
+.scale div:hover{
+    transform: scale(1.007);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+
+
+.scaled{
+    transition: all 0.1s ease-in-out;
+}
+
+.scaled:hover{
+    transform: scale(1.007);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}

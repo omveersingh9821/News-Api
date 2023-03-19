@@ -3,15 +3,14 @@ import styles from "../../styles/Content.module.css";
 
 const categorySubPage = ({ data }) => {
   return (
-    <div className={styles.main1}>
+    <div className={styles.subCategory}>
       {data.map((article, index) => (
         <div
-          className="card mb-2"
+          className={`${styles.subInner} card mb-2`}
           style={{
-            maxWidth: "440px",
-            margin: "0rem 1rem 0 1rem",
+            width: "430px",
+            margin: "1rem 1rem 0 1rem",
             padding: "2px",
-            backgroundColor: "black",
             color: "#eee",
             border:"1px solid gray"
           }}
@@ -24,18 +23,14 @@ const categorySubPage = ({ data }) => {
                 <h1
                   className="card-title"
                   onClick={() => (window.location.href = article.url)}
-                  style={{ cursor: "pointer", fontSize: "20px" }}
+                  style={{ cursor: "pointer", fontSize: "20px",color:"black" }}
                 >
                   {article.name}
                 </h1>
-                <p className="card-text" style={{ color: "#c6c6c6" }}>
+                <p className="card-text" style={{ color: "gray" }}>
                   {article.description}
                 </p>
-                <p className="card-text">
-                  <small style={{ color: "#a9a9a9" }}>
-                    Published At : {article.publishedAt}
-                  </small>
-                </p>
+                
               </div>
             </div>
           </div>

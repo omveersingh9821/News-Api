@@ -6,14 +6,17 @@
     align-items: center;
     position:fixed;
     top: 0;
-    background-color: #000910;
-    z-index: 1;
+    background-color: #d6d9db56;
+    z-index: 99;
 }
 
 .main h5{
     margin: 2px;
     cursor: pointer;
-    color: rgb(254, 254, 254);
+    color: rgb(28, 24, 24);
+    padding: 0 7px;
+    border-radius: 6px;
+    background-color: #ecf0f356;
 }
 .main h5::after{
   content: '';
@@ -22,9 +25,9 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #efefef;
+  background-color: #28282a;
   transform-origin: left right;
-  transition: transform 1s ease-out;
+  transition: transform .5s ease-out;
 }
 .main h5::after {
     transform: scaleX(0);

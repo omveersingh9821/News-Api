@@ -8,7 +8,7 @@ const Content = ({ currentArticles }) => {
     
       <div className={styles.main}>
         {currentArticles.map((article, index) => (
-          <div className="card mb-3" style={{maxWidth: "25rem",height:"34rem",margin: "0rem 1rem 0 1rem",padding: "2px",backgroundColor:"black",color:"#eee"}} key={index}>
+          <div className={`${styles.scaled} card mb-3`} style={{maxWidth: "25rem",margin: "0rem 1rem 0 1rem",padding: "2px",boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px;"}} key={index}>
             <div className="row no-gutters">
               {article.urlToImage && (
                 <div className="col-md-4" style={{ width: "540px" }}>
@@ -29,7 +29,7 @@ const Content = ({ currentArticles }) => {
                   >
                     {article.title}
                   </h1>
-                  <p className="card-text" style={{ color: "#c6c6c6" }}>
+                  <p className="card-text" style={{ color:"#5e5e5e" }}>
                     {article.description}
                   </p>
                   <p className="card-text">

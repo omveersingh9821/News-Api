@@ -12,8 +12,9 @@ body {
 
 html,
 body {
-  background-color: #000910;
-  color: #c6c6c6;
+  background-color: #ffffff;
+  color: #201f1f;
+
 }
 
 a {
@@ -46,7 +47,7 @@ a {
   margin: 0 0.1rem;
   font-size: 1rem;
   cursor: pointer;
-  color: #fefefe;
+  color: #262424;
   border: 1px solid #ccc;
   padding: 0.45rem 0.75rem;
   border-radius: 0.25rem;

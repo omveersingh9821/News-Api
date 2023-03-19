@@ -1,12 +1,13 @@
 import Card from "react-bootstrap/Card";
 import { useRouter } from 'next/router';
+import styles from '../../styles/Content.module.css';
 
 const Categories = () => {
   const router = useRouter();
   return (
-    <div className="page-container container ">
-      <div className="container d-flex justify-content-center flex-wrap" style={{marginTop:"6rem"}}>
-        <div className="card mx-3 mb-3" style={{ width: "18rem" }}>
+    <div className="container">
+      <div className={`${styles.scale} container d-flex justify-content-center flex-wrap`} style={{marginTop:"6rem"}}>
+        <div className="card mx-3 mb-3 scale" style={{ width: "18rem"}}>
           <Card.Title className="text-center">Sports</Card.Title>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8xG68cFTHGDPZ5_jRvMoB1e0fa3ybLw2QcAPvf_THuKbMmoEyx1rkZivJk-CaZIPtydc&usqp=CAU"
