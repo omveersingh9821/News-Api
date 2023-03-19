@@ -1,6 +1,6 @@
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
 import ReactPaginate from 'react-paginate';
