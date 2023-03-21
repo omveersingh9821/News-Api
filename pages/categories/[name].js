@@ -1,9 +1,13 @@
 import axios from "axios";
 import styles from "../../styles/Content.module.css";
+import Head from 'next/head';
 
 const categorySubPage = ({ data,query }) => {
   return (
     <>
+      <Head>
+        <title>{query}</title>
+      </Head>
     <h1 className="text-center" style={{ textDecoration: "underline",marginTop:"5rem"}}>{query.toUpperCase()}</h1>
     <div className={styles.subCategory}>
       {data.map((article, index) => (
@@ -50,7 +54,7 @@ export const getServerSideProps = async (pageContext) => {
   );
   const jsonData = await response.data;
   const { sources } = jsonData;
-  console.log(sources);
+  // console.log(sources);
   return {
     props: {
       data: sources,

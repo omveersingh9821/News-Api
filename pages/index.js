@@ -6,6 +6,7 @@ import Content from "@/components/Content";
 import Spinner from "@/components/Spinner";
 import ReactPagination from "@/components/ReactPagination";
 import SearchBar from "@/components/SearchBar";
+import Head from "next/head";
 
 export default function Home({ articles, API_KEYS }) {
   const [search, setSearch] = useState("");
@@ -21,7 +22,7 @@ export default function Home({ articles, API_KEYS }) {
   const start = currentPage * articlesPerPage;
   const currentArticles = articles.slice(start, start + articlesPerPage);
 
-  //debounce 
+  //debounce
   const getData = async (value) => {
     if (value) {
       const url = "/api/handleRequest";
@@ -44,7 +45,7 @@ export default function Home({ articles, API_KEYS }) {
     }, 700),
     []
   );
-   
+
   const handleValue = (value) => {
     setSearch(value);
     deb(value);
@@ -76,31 +77,40 @@ export default function Home({ articles, API_KEYS }) {
 
   return (
     <>
-      <div className="page-container mb-5" >
-        {/* <div className={styles.main}>
-          <h1 className={styles.title}>
-            Welcome to <span>News</span> API
-          </h1>
-        </div> */}
-
-        
-        <SearchBar styles={styles} handleSearch={handleSearch} handleValue={handleValue}/>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <div className="page-container mb-5">
+        <SearchBar
+          styles={styles}
+          handleSearch={handleSearch}
+          handleValue={handleValue}
+        />
 
         {search.length !== 0 ? (
           <div className="d-flex flex-column">
             {result.length === 0 ? (
               <Spinner styles={styles} />
             ) : (
-                <>
-                <h1 className="text-center mt-4" style={{textDecoration:"underline"}}>Top Search Results</h1>
-              <Content currentArticles={result} />
-                </>
-              
+              <>
+                <h1
+                  className="text-center mt-4"
+                  style={{ textDecoration: "underline" }}
+                >
+                  Top Search Results
+                </h1>
+                <Content currentArticles={result} />
+              </>
             )}
           </div>
         ) : (
-            <>
-              <h1 className="text-center mt-4" style={{textDecoration:"underline"}}>Breaking News</h1>
+          <>
+            <h1
+              className="text-center mt-4"
+              style={{ textDecoration: "underline" }}
+            >
+              Breaking News
+            </h1>
             <Content currentArticles={currentArticles} />
             <ReactPagination
               articles={articles}
@@ -116,7 +126,6 @@ export default function Home({ articles, API_KEYS }) {
 
 export const getServerSideProps = async (pageContext) => {
   const API_KEYS = process.env.API_KEYS;
-  // console.log(API_KEYS);
   const response = await axios.get(
     `https://newsapi.org/v2/top-headlines?country=in`,
     {
