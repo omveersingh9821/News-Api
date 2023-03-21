@@ -1,12 +1,14 @@
 import axios from "axios";
 import styles from "../../styles/Content.module.css";
 
-const categorySubPage = ({ data }) => {
+const categorySubPage = ({ data,query }) => {
   return (
+    <>
+    <h1 className="text-center" style={{ textDecoration: "underline",marginTop:"5rem"}}>{query.toUpperCase()}</h1>
     <div className={styles.subCategory}>
       {data.map((article, index) => (
         <div
-          className={`${styles.subInner} card mb-2`}
+          className={`${styles.subInner} card mb-1`}
           style={{
             width: "430px",
             margin: "1rem 1rem 0 1rem",
@@ -36,7 +38,8 @@ const categorySubPage = ({ data }) => {
           </div>
         </div>
       ))}
-    </div>
+      </div>
+      </>
   );
 };
 
@@ -51,6 +54,7 @@ export const getServerSideProps = async (pageContext) => {
   return {
     props: {
       data: sources,
+      query
     },
   };
 };
