@@ -21,6 +21,7 @@ export default function Home({ articles, API_KEYS }) {
 
   const start = currentPage * articlesPerPage;
   const currentArticles = articles.slice(start, start + articlesPerPage);
+  const currentResult = result.slice(start, start + articlesPerPage);
 
   //debounce
   const getData = async (value) => {
@@ -99,7 +100,12 @@ export default function Home({ articles, API_KEYS }) {
                 >
                   Top Search Results
                 </h1>
-                <Content currentArticles={result} />
+                  <Content currentArticles={currentResult} />
+                  <ReactPagination
+                    articles={result}
+                    articlesPerPage={articlesPerPage}
+                    handlePageClick={handlePageClick}
+                  />
               </>
             )}
           </div>

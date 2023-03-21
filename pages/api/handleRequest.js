@@ -6,7 +6,7 @@ const handler = async (req, res) => {
     // console.log(req.body);
 
   const response = await axios.get(
-    `https://newsapi.org/v2/everything?q=${value}&pageSize=12`,
+    `https://newsapi.org/v2/everything?q=${value}&pageSize=20`,
     {
       headers: {
         Authorization: `Bearer ${process.env.API_KEYS}`,

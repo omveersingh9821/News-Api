@@ -5,7 +5,7 @@ export default function Toolbar() {
   const router = useRouter();
   return (
     <>
-      <div className={styles.main}>
+      <div className={`${styles.main} bg-light`}>
         <div onClick={() => router.push("/")} className="mx-3">
           <h5 className="">Home</h5>
         </div>

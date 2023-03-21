@@ -8,7 +8,7 @@ const categorySubPage = ({ data,query }) => {
       <Head>
         <title>{query}</title>
       </Head>
-    <h1 className="text-center" style={{ textDecoration: "underline",marginTop:"5rem"}}>{query.toUpperCase()}</h1>
+    <h1 className="text-center" style={{marginTop:"5rem",color:"gray"}}>{query.toUpperCase()}</h1>
     <div className={styles.subCategory}>
       {data.map((article, index) => (
         <div
