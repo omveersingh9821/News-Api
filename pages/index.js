@@ -17,8 +17,9 @@ export default function Home({ articles, API_KEYS }) {
     setCurrentPage(selected);
     window.scroll(0, 0);
   };
-  const offset = currentPage * articlesPerPage;
-  const currentArticles = articles.slice(offset, offset + articlesPerPage);
+
+  const start = currentPage * articlesPerPage;
+  const currentArticles = articles.slice(start, start + articlesPerPage);
 
   //debounce 
   const getData = async (value) => {
@@ -90,11 +91,16 @@ export default function Home({ articles, API_KEYS }) {
             {result.length === 0 ? (
               <Spinner styles={styles} />
             ) : (
+                <>
+                <h1 className="text-center mt-4" style={{textDecoration:"underline"}}>Top Search Results</h1>
               <Content currentArticles={result} />
+                </>
+              
             )}
           </div>
         ) : (
-          <>
+            <>
+              <h1 className="text-center mt-4" style={{textDecoration:"underline"}}>Breaking News</h1>
             <Content currentArticles={currentArticles} />
             <ReactPagination
               articles={articles}
