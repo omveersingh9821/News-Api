@@ -39,4 +39,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Page Insight Result
 <img width="927" alt="A9EB02CD-0275-46C0-81B6-ADE2EDC9403B" src="https://user-images.githubusercontent.com/88961233/227231333-20ab3f69-47d5-4cbc-858b-54203716c88f.png">
-![2055B4D5-BB84-4031-9231-B447FFCEF532_1_105_c](https://user-images.githubusercontent.com/88961233/227231425-4299b64d-3680-4eb6-84dd-bedc7240a51f.jpeg)
+<img width="927" alt="A9EB02CD-0275-46C0-81B6-ADE2EDC9403B" src="https://user-images.githubusercontent.com/88961233/227232813-e549303b-8b5c-4f71-84dc-15ab4bf80cda.jpeg">
+
+# Deployed Link
+https://news-api-omega-six.vercel.app/
+
+# Folder Structure Tree
+<img width="927" alt="A9EB02CD-0275-46C0-81B6-ADE2EDC9403B" src="https://user-images.githubusercontent.com/88961233/227237762-f073f33d-40de-4268-bc32-7f0dc39e4e44.jpg">
+
+# How to Clone
+git clone https://github.com/omveersingh9821/News-Api
+npm install 
+npm run dev 
+
+
+
